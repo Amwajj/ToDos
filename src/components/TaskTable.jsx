@@ -35,7 +35,7 @@ function TaskTable() {
     headers: getAuthHeader()
   })
   .then(response => {
-    setTasksA(response.data.content); // Or .data depending on your backend
+    setTasksA(response.data.content); 
     setLoading(false);
   })
   .catch(error => {
@@ -43,17 +43,17 @@ function TaskTable() {
     setLoading(false);
   });
 };
-  // Load tasks
+
   useEffect(() => {
    loadTasks();
   }, []);
 
 
-  // Load tags for filter dropdown
+  
   useEffect(() => {
     axios.get('http://localhost:8080/tasks/tag')
       .then(response => {
-        setTags(response.data);  // assuming backend returns a list of tag strings
+        setTags(response.data);  
       })
       .catch(error => {
         console.error('Error fetching tags:', error);
@@ -65,7 +65,7 @@ function TaskTable() {
   // Filter tasks by tag
   const handleTagFilter = (tag) => {
     if (!tag) {
-      // Clear filter, reload all tasks
+      
       axios.get('http://localhost:8080/tasks/tag')
         .then(res => {
           setTasksA(res.data.content);
@@ -74,7 +74,7 @@ function TaskTable() {
     } else {
       axios.get(`http://localhost:8080/tasks/filter?tag=${tag}`)
         .then(res => {
-          setTasksA(res.data.content);  // assuming backend returns List<TaskDto>
+          setTasksA(res.data.content);  
         })
         .catch(err => console.error(err));
     }
@@ -396,6 +396,7 @@ function TaskTable() {
           </Space>
         </DragDropContext>
       </div>
+      {/* Chart */}
       <EchartCards todoCount={tasksA.length} doneCount={tasksB.length} />
         
 
