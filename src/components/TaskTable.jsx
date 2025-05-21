@@ -10,7 +10,8 @@ import { GoDotFill } from "react-icons/go";
 import {getTagColorClass} from './tagColor';
 import {Add} from './Add';
 import { getAuthHeader } from '../auth';
-import Analytics from './Analytics';
+import EchartCards from '../components/Chart/EchartCards'
+
 const { Meta } = Card;
 const { Option } = Select;
 
@@ -26,8 +27,6 @@ function TaskTable() {
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [tags, setTags] = useState([]); 
   const [isModalOpen,setIsModalOpen] =useState(false);
- 
-
 
   const navigate = useNavigate();
 
@@ -60,6 +59,8 @@ function TaskTable() {
         console.error('Error fetching tags:', error);
       });
   }, []);
+
+  
 
   // Filter tasks by tag
   const handleTagFilter = (tag) => {
@@ -326,7 +327,7 @@ function TaskTable() {
               {(provided, snapshot) => (
                 <Card
                   className="relative"
-                  title={<div className="flex items-center gap-2"><GoDotFill className="text-green-900" /><span>To Do</span></div>}
+                  title={<div className="flex items-center gap-2"><GoDotFill className="text-green-900" /><span>Done</span></div>}
                   style={{
                     background: snapshot.isDraggingOver ? '#e3f2fd' : 'white',
                     width: 400,
@@ -395,7 +396,8 @@ function TaskTable() {
           </Space>
         </DragDropContext>
       </div>
-      
+      <EchartCards todoCount={tasksA.length} doneCount={tasksB.length} />
+        
 
       {/* Modal */}
       <Modal

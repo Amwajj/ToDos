@@ -6,13 +6,13 @@ import { Image } from 'antd';
 import Sidebar from './components/Sidebar';
 import TaskTable from './components/TaskTable';
 import CalendarPage from './components/CalendarPage';
-import Analytics from './components/Analytics';
+
 
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Unauthorized from './pages/Unauthorized';
 
-import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from './components/Login/PrivateRoute';
 import AdminRoute from './components/Login/AdminRoute';
 import UserTasks from './components/UserTasks';
 import { logout } from './auth';
@@ -48,18 +48,18 @@ function App() {
         </nav>
       </header>
 
-      {/* Main */}
+  
       <div className="flex">
         <Sidebar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} selectedTask={selectedTask} />
 
         <Routes>
-          {/* Auth */}
+        
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
 
-          {/* Protected */}
+          
           <Route
             path="/UserTasks"
             element={
@@ -79,14 +79,7 @@ function App() {
               </AdminRoute>
             }
           />
-          <Route
-            path="/analytics"
-            element={
-              <PrivateRoute>
-                <Analytics />
-              </PrivateRoute>
-            }
-          />
+       
           <Route
             path="/calendar"
             element={
